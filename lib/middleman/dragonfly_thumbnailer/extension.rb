@@ -12,7 +12,7 @@ module Middleman
       end
 
       def absolute_source_path(path)
-        File.join(app.config[:source], app.config[:images_dir], path)
+        File.join(app.source_dir, path)
       end
 
       def build_path(image)
@@ -51,7 +51,7 @@ module Middleman
           image = extensions[:dragonfly_thumbnailer].thumb(path, geometry)
           return unless image
 
-          if environment == :development
+          if app.environment == :development
             url = image.b64_data
           else
             url = extensions[:dragonfly_thumbnailer].build_path(image)
